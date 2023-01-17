@@ -24,8 +24,7 @@ while k <= Max:
     if visited[k][flag] != -1 and visited[k][flag] <= time:
         answer = time
         break
-    flag = 1 - flag
     time += 1
     k += time
-
+    flag = 1 - flag
 print(answer)

@@ -1,5 +1,5 @@
-from heapq import heappush, heappop
 from collections import deque
+from heapq import heappush, heappop
 
 n = int(input())
 rows = list(map(int, input().split()))
@@ -13,14 +13,13 @@ for i in range(n):
 for i in range(n):
     q = deque()
     for j in range(rows[i]):
-        a, b = heappop(pq)
-        a = -a
-        G[i][b] = 1
-        q.append((a - 1, b))
-
+        cnt, idx = heappop(pq)
+        cnt = -cnt
+        G[i][idx] = 1
+        q.append((cnt - 1, idx))
     while q:
-        a, b = q.popleft()
-        heappush(pq, (-a, b))
+        cnt, idx = q.popleft()
+        heappush(pq, (-cnt, idx))
 
 def is_valid():
     for j in range(n):
@@ -31,11 +30,11 @@ def is_valid():
             return False
     return True
 
-if not is_valid():
-    print(-1)
-else:
+if is_valid():
     print(1)
     for i in range(n):
         for j in range(n):
             print(G[i][j], end='')
         print()
+else:
+    print(-1)

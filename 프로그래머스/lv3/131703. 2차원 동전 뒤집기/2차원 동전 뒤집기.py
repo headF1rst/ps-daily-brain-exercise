@@ -7,13 +7,13 @@ def flipp(G, j):
 
 def solution(beginning, target):
     n, m = len(beginning), len(beginning[0])
-    flipped = [[] for _ in range(n)]
     INF = math.inf
     answer = INF
+    flipped = [[] for _ in range(n)]
     for i in range(n):
-        for b in beginning[i]:
-            flipped[i].append(1 - b)
-            
+        for j in range(m):
+            flipped[i].append(1 - beginning[i][j])
+    
     for check in range(1 << n):
         flipped_rows = []
         flipped_cnt = 0
@@ -24,7 +24,7 @@ def solution(beginning, target):
                 flipped_cnt += 1
             else:
                 flipped_rows.append(beginning[i][:])
-    
+        
         for j in range(m):
             cur_col = []
             target_col = []
@@ -32,13 +32,14 @@ def solution(beginning, target):
                 cur_col.append(flipped_rows[i][j])
                 target_col.append(target[i][j])
             
-            if target_col != cur_col:
+            if cur_col != target_col:
                 flipp(flipped_rows, j)
                 flipped_cnt += 1
         
-        if flipped_rows == target:
+        if target == flipped_rows:
             answer = min(answer, flipped_cnt)
     
     if answer == INF:
         return -1
     return answer
+            

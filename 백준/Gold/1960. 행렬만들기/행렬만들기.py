@@ -1,12 +1,12 @@
-from collections import deque
 from heapq import heappush, heappop
+from collections import deque
 
 n = int(input())
 rows = list(map(int, input().split()))
 cols = list(map(int, input().split()))
 G = [[0] * n for _ in range(n)]
-
 pq = []
+
 for i in range(n):
     heappush(pq, (-cols[i], i))
 

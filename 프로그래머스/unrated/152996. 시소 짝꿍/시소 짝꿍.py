@@ -1,20 +1,21 @@
 from collections import defaultdict
 
 def solution(weights):
-    cnt = 0
-    pos = [(2, 3), (2, 4), (3, 4), (4, 3), (4, 2), (3, 2)]
+    answer = 0
+    pos = [(2, 3), (2, 4), (3, 4), (3, 2), (4, 2), (4, 3)]
     dic = defaultdict(int)
-
     for weight in weights:
         dic[weight] += 1
-
-    for mw in dic:
-        if dic[mw] > 1:
-            cnt += dic[mw] * (dic[mw] - 1) // 2
-        for mpos, fpos in pos:
-            expected_fw = mw * mpos / fpos
-            if expected_fw in dic:
-                cnt += dic[mw] * dic[expected_fw]
-        dic[mw] = 0
-
-    return cnt
+    
+    for w in dic:
+        if dic[w] > 1:
+            answer += dic[w] * (dic[w] - 1) // 2
+        
+        for mp, fp in pos:
+            fw = w * mp / fp
+            if fw in dic:
+                answer += dic[fw] * dic[w]
+        dic[w] = 0
+    
+    return answer
+    

@@ -1,7 +1,7 @@
 n, m = map(int, input().split())
 know_truth = list(map(int, input().split()))[1:]
-parent = [i for i in range(n + 1)]
 parties = []
+parent = [i for i in range(n + 1)]
 answer = 0
 
 def find_parent(x):
@@ -17,7 +17,7 @@ def union(a, b):
         return
     if a in know_truth:
         parent[b] = parent[a]
-    elif b in know_truth:
+    if b in know_truth:
         parent[a] = parent[b]
     else:
         if a < b:
@@ -27,17 +27,17 @@ def union(a, b):
 
 for _ in range(m):
     party_info = list(map(int, input().split()))
-    party_len = party_info[0]
+    p_len = party_info[0]
     party = party_info[1:]
-
-    for i in range(party_len - 1):
+    for i in range(p_len - 1):
         union(party[i], party[i + 1])
     parties.append(party)
 
 for party in parties:
-    for i in range(len(party)):
-        if find_parent(party[i]) in know_truth:
+    for p in party:
+        if find_parent(p) in know_truth:
             break
     else:
         answer += 1
+
 print(answer)

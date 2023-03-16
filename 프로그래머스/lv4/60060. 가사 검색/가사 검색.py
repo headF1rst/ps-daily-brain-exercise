@@ -8,11 +8,10 @@ def solution(words, queries):
     answer = []
     cands = defaultdict(list)
     reverse_cands = defaultdict(list)
-    
     for word in words:
         cands[len(word)].append(word)
         reverse_cands[len(word)].append(word[::-1])
-        
+    
     for cand in cands.values():
         cand.sort()
     for cand in reverse_cands.values():

@@ -1,11 +1,20 @@
-from heapq import heappush, heappop
 from collections import deque
+from heapq import heappop, heappush
 
 n = int(input())
 rows = list(map(int, input().split()))
 cols = list(map(int, input().split()))
 G = [[0] * n for _ in range(n)]
 pq = []
+
+def is_valid():
+    for j in range(n):
+        total = 0
+        for i in range(n):
+            total += G[i][j]
+        if total != cols[j]:
+            return False
+    return True
 
 for i in range(n):
     heappush(pq, (-cols[i], i))
@@ -20,15 +29,6 @@ for i in range(n):
     while q:
         cnt, idx = q.popleft()
         heappush(pq, (-cnt, idx))
-
-def is_valid():
-    for j in range(n):
-        col_sum = 0
-        for i in range(n):
-            col_sum += G[i][j]
-        if col_sum != cols[j]:
-            return False
-    return True
 
 if is_valid():
     print(1)

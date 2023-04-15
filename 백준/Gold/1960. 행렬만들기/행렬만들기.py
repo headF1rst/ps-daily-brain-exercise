@@ -1,5 +1,5 @@
+from heapq import heappush, heappop
 from collections import deque
-from heapq import heappop, heappush
 
 n = int(input())
 rows = list(map(int, input().split()))

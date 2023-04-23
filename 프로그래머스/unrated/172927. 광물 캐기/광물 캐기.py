@@ -1,13 +1,13 @@
 def solution(picks, minerals):
-    answer = 0
+    
+    def divide(minerals, n):
+        return [minerals[i: i + n] for i in range(0, len(minerals), n)]
+    
+    minerals_divided = divide(minerals, 5)
     costs = []
+    answer = 0
     
-    def divide(minerals, off_set):
-        return [minerals[i: i + off_set] for i in range(0, len(minerals), off_set)]
-        
-    divided_minerals = divide(minerals, 5)
-    
-    for mineral in divided_minerals:
+    for mineral in minerals_divided:
         cost = [0, 0, 0]
         for m in mineral:
             if m == 'diamond':
@@ -23,6 +23,7 @@ def solution(picks, minerals):
                 cost[1] += 1
                 cost[2] += 1
         costs.append(cost)
+    
     while len(costs) > sum(picks):
         costs.pop()
     
@@ -32,14 +33,11 @@ def solution(picks, minerals):
         if picks[0] > 0:
             picks[0] -= 1
             answer += cost[0]
-            continue
-        if picks[1] > 0:
+        elif picks[1] > 0:
             picks[1] -= 1
             answer += cost[1]
-            continue
-        if picks[2] > 0:
+        elif picks[2] > 0:
             picks[2] -= 1
             answer += cost[2]
-            continue
-            
+    
     return answer

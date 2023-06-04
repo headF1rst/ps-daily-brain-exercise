@@ -1,8 +1,9 @@
 def solution(phone_book):
     phone_book.sort()
+    n = len(phone_book)
     
-    for a, b in zip(phone_book, phone_book[1: ]):
-        if b.startswith(a):
+    for i in range(n - 1):
+        if phone_book[i + 1].startswith(phone_book[i]):
             return False
     
     return True
